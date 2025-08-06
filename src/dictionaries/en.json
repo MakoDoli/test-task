@@ -1,0 +1,37 @@
+{
+  "header": {
+    "login": "Login",
+    "register": "Register",
+    "dashboard": "Dashboard"
+  },
+  "home": {
+    "title": "Welcome to Authentication App",
+    "description": "A secure authentication system with multilingual support built with Next.js, Tailwind CSS, and Supabase."
+  },
+  "auth": {
+    "email": "Email",
+    "password": "Password",
+    "username": "Username",
+    "login": "Login",
+    "register": "Register",
+    "alreadyHaveAccount": "Already have an account?",
+    "dontHaveAccount": "Don't have an account?",
+    "loginHere": "Login here",
+    "registerHere": "Register here"
+  },
+  "dashboard": {
+    "welcome": "Welcome",
+    "products": "Products",
+    "profile": "Profile",
+    "logout": "Logout"
+  },
+  "products": {
+    "title": "Products",
+    "empty": "No products found"
+  },
+  "profile": {
+    "title": "Profile",
+    "email": "Email",
+    "username": "Username"
+  }
+}

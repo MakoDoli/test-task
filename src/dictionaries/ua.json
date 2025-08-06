@@ -1,0 +1,37 @@
+{
+  "header": {
+    "login": "Увійти",
+    "register": "Зареєструватися",
+    "dashboard": "Панель керування"
+  },
+  "home": {
+    "title": "Ласкаво просимо до Authentication App",
+    "description": "Безпечна система аутентифікації з багатомовною підтримкою, створена за допомогою Next.js, Tailwind CSS та Supabase."
+  },
+  "auth": {
+    "email": "Електронна пошта",
+    "password": "Пароль",
+    "username": "Ім'я користувача",
+    "login": "Увійти",
+    "register": "Зареєструватися",
+    "alreadyHaveAccount": "Вже маєте обліковий запис?",
+    "dontHaveAccount": "Не маєте облікового запису?",
+    "loginHere": "Увійдіть тут",
+    "registerHere": "Зареєструйтеся тут"
+  },
+  "dashboard": {
+    "welcome": "Ласкаво просимо",
+    "products": "Товари",
+    "profile": "Профіль",
+    "logout": "Вийти"
+  },
+  "products": {
+    "title": "Товари",
+    "empty": "Товарів не знайдено"
+  },
+  "profile": {
+    "title": "Профіль",
+    "email": "Електронна пошта",
+    "username": "Ім'я користувача"
+  }
+}
