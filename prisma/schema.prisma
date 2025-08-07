@@ -11,24 +11,102 @@ generator client {
 datasource db {
   provider = "postgresql"
   url      = env("DATABASE_URL")
-  directUrl    = env("DIRECT_URL")   
+  directUrl    = env("DIRECT_URL")  
+ 
 }
 
-model User {
-  id        String   @id @default(cuid())
+model TestUser {
+  id        String   @id @default(uuid())
   email     String   @unique
   username  String
   password  String
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
+ 
 }
 
 model Product {
-  id          String   @id @default(cuid())
+  id          String   @id @default(uuid())
   name        String
   description String
   price       Float
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
+ 
 }
 
+
+// This is testing project so I used existing database and added a new models for existing tables
+model VoiceUser {
+  id         String @id @default(uuid())
+  clerkId    String @unique
+  createdAt  DateTime @default(now())
+  recordings Recording[]
+  isPaid    Boolean @default(false)
+}
+
+model User {
+  id             Int      @id @default(autoincrement())
+  email          String   @unique
+  password       String
+  emailVerified  Boolean  @default(false)
+}
+
+model Recording {
+  id         String @id @default(uuid())
+  userId     String
+  createdAt  DateTime @default (now())
+  user       VoiceUser  @relation(fields: [userId], references: [id])
+  fileUrl    String
+  transcript String
+}
+
+
+
+// enum Difficulty {
+//   მარტივი
+//   საშუალო
+//   რთული
+// }
+
+// enum Category {
+//   სალათი
+//   სუპი
+//   მთავარი_კერძი
+//   დესერტი
+//   სასმელი
+//   წასახემსებელი
+// }
+
+// enum MealType {
+//   საუზმე
+//   ლანჩი
+//   სადილი
+// }
+
+
+
+model recipes {
+  id           BigInt    @id @default(autoincrement()) // bigint with identity = autoincrement
+  createdAt    DateTime  @default(now()) @map("created_at")
+  title        String?   @db.Text
+  description  String?   @db.Text
+  image        String?   @db.Text
+  cook_time    String?   @db.Text
+  prep_time    String?   @db.Text
+  servings     String?   @db.Text
+  difficulty   String?   @db.Text
+  rating       Float?    @default(4.5)
+  reviews      String?   @db.Text
+  category     String?   @db.Text
+  vegetarian   Boolean?  @default(false)
+  cuisine      String?   @db.Text
+  ingredients  Json?     // jsonb
+  instructions Json?     // jsonb
+  nutrition    Json?     // jsonb
+  tips         Json?     // jsonb
+  author       String?   @default("admin") @db.Text
+  type         String?   @db.Text
+
+  @@map("recipes")
+}
