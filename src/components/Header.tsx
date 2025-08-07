@@ -31,7 +31,7 @@ export async function Header() {
                 <Link href="/login">{dict.header.login}</Link>
               </Button>
               <Button asChild>
-                <Link href="/register">{dict.header.register}</Link>
+                <Link href="/signup">{dict.header.register}</Link>
               </Button>
             </>
           )}

@@ -78,7 +78,7 @@ export function LoginForm({ dictionary }: { dictionary: Dictionary }) {
       </form>
       <div className="text-center text-sm">
         {dictionary.dontHaveAccount}{" "}
-        <Link href="/register" className="underline">
+        <Link href="/signup" className="underline">
           {dictionary.registerHere}
         </Link>
       </div>

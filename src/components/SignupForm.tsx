@@ -34,7 +34,7 @@ export function SignupForm({ dictionary }: { dictionary: Dictionary }) {
     const username = formData.get("username") as string;
 
     try {
-      const response = await fetch("/api/auth/register", {
+      const response = await fetch("/api/auth/signup", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
