@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
 "use client";
 
 import { usePathname } from "next/navigation";
@@ -12,6 +11,8 @@ import {
   SidebarMenu,
   SidebarMenuButton,
   SidebarMenuItem,
+  SidebarRail,
+  useSidebar,
 } from "@/components/ui/sidebar";
 import { Button } from "@/components/ui/button";
 import { useRouter } from "next/navigation";
@@ -36,6 +37,7 @@ export function DashboardSidebar({
   const router = useRouter();
   const { language } = useLanguage();
   const [dictionary, setDictionary] = useState<Dictionary | null>(null);
+  const { isMobile, setOpenMobile } = useSidebar();
 
   useEffect(() => {
     async function loadDictionary() {
@@ -67,6 +69,13 @@ export function DashboardSidebar({
     }
   };
 
+  const handleMenuClick = () => {
+    // Close mobile sidebar when menu item is clicked
+    if (isMobile) {
+      setOpenMobile(false);
+    }
+  };
+
   const menuItems = [
     {
       title: dictionary.dashboard.products,
@@ -81,36 +90,62 @@ export function DashboardSidebar({
   ];
 
   return (
-    <Sidebar>
-      <SidebarHeader className="flex items-center px-4 py-2">
-        <Link href="/dashboard" className="text-xl font-bold">
-          AuthApp
-        </Link>
-      </SidebarHeader>
-      <SidebarContent>
-        <SidebarMenu>
-          {menuItems.map((item) => (
-            <SidebarMenuItem key={item.href}>
-              <SidebarMenuButton asChild isActive={pathname === item.href}>
-                <Link href={item.href}>
-                  <item.icon />
-                  <span>{item.title}</span>
-                </Link>
-              </SidebarMenuButton>
-            </SidebarMenuItem>
-          ))}
-        </SidebarMenu>
-      </SidebarContent>
-      <SidebarFooter>
-        <Button
-          variant="ghost"
-          className="w-full justify-start"
-          onClick={handleLogout}
-        >
-          <LogOut className="mr-2 h-4 w-4" />
-          {dictionary.dashboard.logout}
-        </Button>
-      </SidebarFooter>
-    </Sidebar>
+    <>
+      <Sidebar collapsible="icon">
+        <SidebarHeader className="border-b border-sidebar-border">
+          <div className="flex items-center gap-2 px-4 py-2">
+            <Link
+              href="/dashboard"
+              className="text-xl font-bold truncate"
+              onClick={handleMenuClick}
+            >
+              AuthApp
+            </Link>
+          </div>
+        </SidebarHeader>
+
+        <SidebarContent className="px-2">
+          <div className="space-y-2 py-2">
+            <SidebarMenu>
+              {menuItems.map((item) => (
+                <SidebarMenuItem key={item.href}>
+                  <SidebarMenuButton
+                    asChild
+                    isActive={pathname === item.href}
+                    tooltip={item.title}
+                  >
+                    <Link href={item.href} onClick={handleMenuClick}>
+                      <item.icon className="h-4 w-4" />
+                      <span>{item.title}</span>
+                    </Link>
+                  </SidebarMenuButton>
+                </SidebarMenuItem>
+              ))}
+            </SidebarMenu>
+          </div>
+        </SidebarContent>
+
+        <SidebarFooter className="border-t border-sidebar-border">
+          <div className="p-2">
+            <div className="mb-2 px-2 py-1 text-xs text-sidebar-foreground/70 group-data-[collapsible=icon]:hidden">
+              <div className="font-medium truncate">{user.username}</div>
+              <div className="text-xs truncate">{user.email}</div>
+            </div>
+            <Button
+              variant="ghost"
+              className="w-full justify-start h-8 px-2"
+              onClick={handleLogout}
+            >
+              <LogOut className="mr-2 h-4 w-4" />
+              <span className="group-data-[collapsible=icon]:hidden">
+                {dictionary.dashboard.logout}
+              </span>
+            </Button>
+          </div>
+        </SidebarFooter>
+
+        <SidebarRail />
+      </Sidebar>
+    </>
   );
 }
