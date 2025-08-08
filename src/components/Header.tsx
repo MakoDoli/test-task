@@ -6,6 +6,7 @@ import { cookies } from "next/headers";
 import { getDictionary } from "@/lib/dictionary";
 import { auth } from "@/lib/auth";
 import { LanguageSwitcher } from "./LanguageSwitcher";
+import { ThemeToggle } from "./ThemeToggle";
 
 export async function Header() {
   const cookieStore = await cookies();
@@ -21,6 +22,7 @@ export async function Header() {
         </Link>
         <div className="flex items-center gap-4">
           <LanguageSwitcher />
+          <ThemeToggle />
           {session ? (
             <Button asChild>
               <Link href="/dashboard">{dict.header.dashboard}</Link>
