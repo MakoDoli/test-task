@@ -40,6 +40,7 @@ export function DashboardSidebar({
   const { isMobile, setOpenMobile } = useSidebar();
 
   useEffect(() => {
+    if (!language) return;
     async function loadDictionary() {
       const dict = await import(`@/dictionaries/${language}.json`).then(
         (module) => module.default
